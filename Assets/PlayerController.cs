@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
 	public float tilt;
 	public Done_Boundary boundary;
 
-	public GameObject[] shots,eyes;
+	public GameObject[] shots;
 	public Transform shotSpawn;
 	public float fireRate;
 
