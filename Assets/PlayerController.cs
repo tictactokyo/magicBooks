@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.UI;
+
+using UnityEngine.UIElements;
+
 [System.Serializable]
 public class Done_Boundary 
 {
@@ -9,9 +11,10 @@ public class Done_Boundary
 
 public class PlayerController : MonoBehaviour
 {
+    
 	public Image pImage;
 
-
+ 
 
 	public float speed;
 	public float tilt;
@@ -26,17 +29,22 @@ public class PlayerController : MonoBehaviour
 	void Update ()
 	{
 
+       
 
-
-		if (Input.GetButton("Fire1") && Time.time > nextFire) 
+        if (Input.GetButton("Fire1") && Time.time > nextFire) 
 		{
-			nextFire = Time.time + fireRate;
+
+            pImage.SetEnabled( false);
+
+            nextFire = Time.time + fireRate;
 			Instantiate(shots[0], shotSpawn.position, shotSpawn.rotation);
 			GetComponent<AudioSource>().Play ();
 		}
 		if (Input.GetButton("Fire2") && Time.time > nextFire) 
 		{
-			nextFire = Time.time + fireRate;
+            pImage.SetEnabled(true);
+
+            nextFire = Time.time + fireRate;
 			Instantiate(shots[3], shotSpawn.position, shotSpawn.rotation);
 			GetComponent<AudioSource>().Play ();
 		}
@@ -61,13 +69,13 @@ public class PlayerController : MonoBehaviour
 
 		GetComponent<Rigidbody>().velocity = movement * speed;
 
-		GetComponent<Rigidbody>().position = new Vector3
-			(
-				Mathf.Clamp (GetComponent<Rigidbody>().position.x, boundary.xMin, boundary.xMax), 
-				0.0f, 
-				Mathf.Clamp (GetComponent<Rigidbody>().position.z, boundary.zMin, boundary.zMax)
-			);
+		//GetComponent<Rigidbody>().position = new Vector3
+		//	(
+		//		Mathf.Clamp (GetComponent<Rigidbody>().position.x, boundary.xMin, boundary.xMax), 
+		//		0.0f, 
+		//		Mathf.Clamp (GetComponent<Rigidbody>().position.z, boundary.zMin, boundary.zMax)
+		//	);
 
-		GetComponent<Rigidbody>().rotation = Quaternion.Euler (0.0f, 0.0f, GetComponent<Rigidbody>().velocity.x * -tilt);
+	//	GetComponent<Rigidbody>().rotation = Quaternion.Euler (0.0f, 0.0f, GetComponent<Rigidbody>().velocity.x * -tilt);
 	}
 }
