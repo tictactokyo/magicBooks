@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-using UnityEngine.UIElements;
+//using UnityEngine.UI;
 
 [System.Serializable]
 public class Done_Boundary 
@@ -9,17 +9,17 @@ public class Done_Boundary
 	public float xMin, xMax, zMin, zMax;
 }
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : AnimatedObject
 {
     
-	public Image pImage;
+	//public Image pImage;
 
  
 
-	public float speed;
+	
 	public float tilt;
 	public Done_Boundary boundary;
-
+    public bool crouching;
 	public GameObject[] shots;
 	public Transform shotSpawn;
 	public float fireRate;
@@ -34,7 +34,8 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButton("Fire1") && Time.time > nextFire) 
 		{
 
-            pImage.SetEnabled( false);
+           // pImage.tintColor = new Color(1f, 1f, 1f, 1f);
+            //gameObject. SetEnabled( false);
 
             nextFire = Time.time + fireRate;
 			Instantiate(shots[0], shotSpawn.position, shotSpawn.rotation);
@@ -42,7 +43,7 @@ public class PlayerController : MonoBehaviour
 		}
 		if (Input.GetButton("Fire2") && Time.time > nextFire) 
 		{
-            pImage.SetEnabled(true);
+            
 
             nextFire = Time.time + fireRate;
 			Instantiate(shots[3], shotSpawn.position, shotSpawn.rotation);
@@ -56,18 +57,30 @@ public class PlayerController : MonoBehaviour
 			Instantiate(shots[1], shotSpawn.position, shotSpawn.rotation);
 			GetComponent<AudioSource>().Play ();
 		}
+        if (Input.GetKeyDown("q") && Time.time > nextFire)
+        {
+            crouching = true;
+        }
 
-	}
+    }
+
+  public void onLanded()
+    {
+
+        animator.SetBool("IsJumping", false);
+    }
 
 	void FixedUpdate ()
 	{
-		float moveHorizontal = Input.GetAxis ("Horizontal");
+		float moveHorizontal = Input.GetAxis ("Horizontal") * max_speed;
 
-		float moveVertical   = Input.GetAxis ("Vertical");
+        animator.SetFloat("Speed", Mathf.Abs(moveHorizontal));
+
+        float moveVertical   = Input.GetAxis ("Vertical") * max_speed;
 
 		Vector3 movement = new Vector3 (moveHorizontal, 0.0f, moveVertical);
 
-		GetComponent<Rigidbody>().velocity = movement * speed;
+		GetComponent<Rigidbody>().velocity = movement ;
 
 		//GetComponent<Rigidbody>().position = new Vector3
 		//	(

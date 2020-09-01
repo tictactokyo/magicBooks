@@ -14,18 +14,18 @@ public class Done_GameController : MonoBehaviour
     public float waveWait;
 
     public Text scoreText;
-    public Text restartText;
+    public Text restartAbleText;
     public Text gameOverText;
 
     private bool gameOver;
-    private bool restart;
+    private bool restartAble;
     private int score;
 
     void Start()
     {
         gameOver = false;
-        restart = false;
-        restartText.text = "";
+        restartAble = false;
+        restartAbleText.text = "";
         gameOverText.text = "";
         score = 0;
         UpdateScore();
@@ -39,7 +39,7 @@ public class Done_GameController : MonoBehaviour
 		{
 			Application.Quit();
 		}
-        if (restart)
+        if (restartAble)
         {
             if (Input.GetKeyDown(KeyCode.R))
             {
@@ -65,8 +65,8 @@ public class Done_GameController : MonoBehaviour
 
             if (gameOver)
             {
-                restartText.text = "Press 'R' for Restart.'esc' to quit ";
-                restart = true;
+                restartAbleText.text = "Press 'R' for restart.'esc' to quit ";
+                restartAble = true;
                 break;
             }
         }
