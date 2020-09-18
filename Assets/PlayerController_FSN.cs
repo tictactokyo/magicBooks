@@ -6,6 +6,17 @@ public class PlayerController_FSN : MonoBehaviour
 {
 
 
+
+
+    public bool isJumping;
+    private Rigidbody rbody;
+    public Rigidbody Rigidbody
+    {
+
+        get { return rbody;}
+
+    }
+
     private PlayerBaseState currentPlayerState;
 
 
@@ -14,6 +25,7 @@ public class PlayerController_FSN : MonoBehaviour
     public readonly PlayerWalkState WalkState = new PlayerWalkState();
     public readonly PlayerJumpingState JumpingState = new PlayerJumpingState();
     public readonly PlayerCrouchingState CrouchingState = new PlayerCrouchingState();
+    public float jumpForce;
 
 
 

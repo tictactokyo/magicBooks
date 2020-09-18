@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerIdleState : PlayerBaseState
 {
+
     public override void EnterState(PlayerController_FSN player)
     {
         throw new System.NotImplementedException();
@@ -18,4 +19,5 @@ public class PlayerIdleState : PlayerBaseState
     {
         throw new System.NotImplementedException();
     }
+    
 }

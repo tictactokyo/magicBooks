@@ -6,7 +6,7 @@ public class PlayerJumpingState : PlayerBaseState
 {
     public override void EnterState(PlayerController_FSN player)
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public override void OnCollisionEnter(PlayerController_FSN player)
@@ -16,6 +16,9 @@ public class PlayerJumpingState : PlayerBaseState
 
     public override void Update(PlayerController_FSN player)
     {
-        throw new System.NotImplementedException();
+        if (Input.GetButtonDown("jump"))
+        {
+            player.Rigidbody.AddForce(Vector3.up * player.jumpForce);
+        }
     }
 }
