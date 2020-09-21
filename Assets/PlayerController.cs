@@ -57,10 +57,8 @@ public class PlayerController : AnimatedObject
 			Instantiate(shots[1], shotSpawn.position, shotSpawn.rotation);
 			GetComponent<AudioSource>().Play ();
 		}
-        if (Input.GetKeyDown("q") && Time.time > nextFire)
-        {
-            crouching = true;
-        }
+
+
 
     }
 

@@ -7,9 +7,19 @@ public class PlayerController_FSN : MonoBehaviour
 
 
 
+    public float nextFire;
 
+
+    public Animator animator;
+
+    public Transform shotSpawn;
+    public float fireRate;
+
+    public float max_speed;
+    public float cur_speed;
     public bool isJumping;
     private Rigidbody rbody;
+
     public Rigidbody Rigidbody
     {
 
@@ -25,6 +35,9 @@ public class PlayerController_FSN : MonoBehaviour
     public readonly PlayerWalkState WalkState = new PlayerWalkState();
     public readonly PlayerJumpingState JumpingState = new PlayerJumpingState();
     public readonly PlayerCrouchingState CrouchingState = new PlayerCrouchingState();
+    public readonly PlayerFlyingState FlyingState = new PlayerFlyingState();
+    public readonly PlayerFallingState FallingState = new PlayerFallingState();
+
     public float jumpForce;
 
 
@@ -35,13 +48,13 @@ public class PlayerController_FSN : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
-
+        rbody = GetComponent<Rigidbody>();
 
     }
     // Start is called before the first frame update
     private void Start()
     {
-        TransitionToState(idleState);
+        TransitionToState(FallingState);
     }
 
     // Update is called once per frame
